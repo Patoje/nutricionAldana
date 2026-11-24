@@ -69,6 +69,33 @@ main > section { scroll-margin-top: 0; }
 /* ---------- hero ---------- */
 .accent-word { color: var(--c-terra); }
 .hero--color .hero__media { background: var(--c-sage); }
+/* ramitas de hojas en la esquina inferior izquierda: el bloque ocupa solo el hueco libre debajo
+   de los botones (si no hay lugar, se achica hasta desaparecer) y se estira hasta el borde de
+   la pantalla y el final del inicio */
+.hero { overflow-x: clip; }
+.hero--split .hero__text.hero__text { align-self: stretch; display: flex; flex-direction: column; min-height: 0; }
+.hero-leaves {
+  flex: 1 1 0; min-height: 0; max-height: 340px; display: flex; align-items: flex-end; pointer-events: none;
+  margin-left: calc(-1 * max(var(--gut), (100vw - var(--container)) / 2));
+  margin-bottom: calc(-1 * var(--hpadb, 64px));
+}
+.hero-leaves svg { height: 100%; width: auto; overflow: visible; }
+.hero-leaves__leaf--light { fill: var(--c-sage); }
+.hero-leaves__leaf--mid { fill: #9dbb88; }
+.hero-leaves__vein, .hero-leaves__stem { fill: none; stroke: #7d9b69; stroke-linecap: round; }
+.hero-leaves__vein { stroke-width: 1.2; opacity: .55; }
+.hero-leaves__stem { stroke-width: 2.4; opacity: .7; }
+.hero-leaves__branch--a { opacity: .75; }
+.hero-leaves__branch { transform-box: view-box; transform-origin: 0 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero__text > .hero-leaves { animation: leavesIn 1.4s var(--ease-out) .3s both; }
+  .hero-leaves__branch--a { animation: leavesSway 4.2s ease-in-out infinite alternate; }
+  .hero-leaves__branch--b { animation: leavesSway 3.6s ease-in-out -1.2s infinite alternate-reverse; }
+  .hero-leaves__branch--c { animation: leavesSway 4.8s ease-in-out -2.1s infinite alternate; }
+}
+@keyframes leavesIn { from { opacity: 0; transform: translate(-16px, 16px); } to { opacity: 1; transform: none; } }
+@keyframes leavesSway { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
+@media (max-width: 1023px) { .hero-leaves { display: none; } }
 
 /* ---------- servicios ---------- */
 .service-cards { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); align-items: stretch; }
@@ -206,11 +233,17 @@ main > section.gallery > .wrap.gallery__head { flex-direction: row; align-items:
 
 /* ---------- inicio: etiqueta "online" y entrada suave ---------- */
 .hero__badge {
-  display: inline-flex; align-items: center; gap: var(--s-2); width: fit-content; margin: 0 0 var(--s-5);
-  padding: var(--s-1) var(--s-3); border-radius: 999px; background: var(--c-sky); color: var(--accent);
-  font-size: var(--t-small); font-weight: 600;
+  display: flex; align-items: center; gap: var(--s-3); margin: 0 0 var(--s-5);
+  font-size: var(--t-label); font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--accent);
 }
-.hero__badge-dot { width: 8px; height: 8px; border-radius: 999px; background: #2f9e5b; box-shadow: 0 0 0 3px rgb(47 158 91 / 22%); }
+.hero__badge::before {
+  content: ""; width: 36px; height: 2px; border-radius: 2px; background: var(--c-terra); flex: none;
+  transform-origin: left center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero__badge::before { animation: badgeLine .9s var(--ease-out) .35s both; }
+}
+@keyframes badgeLine { from { transform: scaleX(0); } to { transform: none; } }
 @media (prefers-reduced-motion: no-preference) {
   .hero__text > * { animation: heroIn .8s var(--ease-out) both; }
   .hero__text > :nth-child(2) { animation-delay: .08s; }

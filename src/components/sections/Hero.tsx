@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowIcon } from "@/components/icons";
+import { HeroLeaves } from "@/components/HeroLeaves";
 import { hero, site } from "@/content/site";
 import { photos } from "@/content/photos";
 
@@ -11,7 +12,6 @@ export function Hero() {
         <div className="hero-text grid hero__grid">
           <div className="hero__text span-5">
             <p className="hero__badge">
-              <span className="hero__badge-dot" aria-hidden="true" />
               {hero.badge}
             </p>
             <h1 id="hero-h">
@@ -25,6 +25,7 @@ export function Hero() {
               </a>
               <a className="btn btn--secondary" href={hero.secondaryAction.href}>{hero.secondaryAction.label}</a>
             </div>
+            <HeroLeaves />
           </div>
           <div className="hero__media span-6 start-7">
             <Image

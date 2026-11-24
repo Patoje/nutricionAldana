@@ -29,10 +29,10 @@ export function About() {
           <div className="span-5 start-8">
             <div className="about__collage">
               <div className="about__main">
-                <Image src={photos.aboutPortrait.src} alt={photos.aboutPortrait.alt} sizes="(max-width: 1023px) 90vw, 32vw" placeholder="blur" style={{ objectPosition: photos.aboutPortrait.focus }} />
+                <Image src={photos.aboutGraduation.src} alt={photos.aboutGraduation.alt} sizes="(max-width: 1023px) 90vw, 32vw" placeholder="blur" style={{ objectPosition: photos.aboutGraduation.focus }} />
               </div>
               <div className="about__second">
-                <Image src={photos.aboutGraduation.src} alt={photos.aboutGraduation.alt} sizes="(max-width: 1023px) 45vw, 16vw" placeholder="blur" style={{ objectPosition: photos.aboutGraduation.focus }} />
+                <Image src={photos.aboutPortrait.src} alt={photos.aboutPortrait.alt} sizes="(max-width: 1023px) 45vw, 16vw" placeholder="blur" style={{ objectPosition: photos.aboutPortrait.focus }} />
               </div>
             </div>
           </div>
